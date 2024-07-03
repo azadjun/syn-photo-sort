@@ -43,7 +43,7 @@ def checkForExiv2():
     subprocess.Popen(['exiv2'], stdout=devnull, stderr=devnull).communicate()
   except OSError as e:
     if e.errno == os.errno.ENOENT:
-      print 'Exiv2 not installed!'
+      print('Exiv2 not installed!')
       sys.exit(1)
 
 def outputFromExiv2(f):
@@ -95,12 +95,11 @@ def handleFileMove(f, filename, fFmtName, problems, move, sourceDir, destDir, er
     pDate = photoDate(f)
     yr = pDate.year
     mo = pDate.month
-    moTxt = pDate.strftime("%b").upper()
     day = pDate.day
     fHash = None
     
     destFileName = pDate.strftime(fFmtName)
-    thisDestDir = destDir + '/%04d/%02d/%02d%s%04d' % (yr, mo, day, moTxt, yr)
+    thisDestDir = destDir + '/%04d/%02d' % (yr, mo)
     
     if not os.path.exists(thisDestDir):
       os.makedirs(thisDestDir)
@@ -175,7 +174,7 @@ def main(argv):
   destDir = args.destination
   scanType = args.type.upper()
   if(scanType != 'PHOTO' and scanType != 'VIDEO'):
-    print "Incorrect type specified! Must be either 'photo' or 'video'"
+    print("Incorrect type specified! Must be either 'photo' or 'video'")
     sys.exit(1)
   
   errorDir = destDir + '/Unsorted/'
@@ -183,11 +182,11 @@ def main(argv):
 
   # Validate these directories exist...
   if not os.path.exists(sourceDir):
-    print 'Source Directory does not exist!'
+    print('Source Directory does not exist!')
     sys.exit(1)
   if not os.path.exists(destDir):
     # os.makedirs(destDir)
-    print 'Destination Directory does not exist!'
+    print('Destination Directory does not exist!')
     sys.exit(1)
 
   # The format for the new file names.
@@ -211,7 +210,7 @@ def main(argv):
       for filename in filenames:
         if filename.upper().endswith(extension):
           f = os.path.join(root, filename)
-          print "Processing: %s..." % f
+          print("Processing: %s..." % f)
           handleFileMove(f, filename, filenameFmt, problems, move, sourceDir, destDir, errorDir)
 
   if(move == True):
@@ -219,11 +218,11 @@ def main(argv):
 
   # Report the problem files, if any.
   if len(problems) > 0:
-    print "\nProblem files:"
-    print "\n".join(problems)
-    print "These can be found in: %s" % errorDir
+    print("\nProblem files:")
+    print("\n".join(problems))
+    print("These can be found in: %s" % errorDir)
   else :
-    print "\nSuccess!"
+    print("\nSuccess!")
 
 ######################## Startup ###########################
 
