@@ -11,7 +11,6 @@ The destination structure looks like he following:
 Dest/
   2015/
     02/
-      02FEB2015/
         20150202-183511.jpg
         20150202-183511-0001.jpg
         20150202-193501.jpg
